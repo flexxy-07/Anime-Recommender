@@ -1,0 +1,53 @@
+#Tick Tack Toe
+# Rules of Game : 
+# Two players : X and O
+# If the winning postion are compelted, then the winner will be displayed
+# After every move, the board will be displayed
+# If the moves crosses boundary, Invalid moves will be displayed
+
+board = [" "] * 9
+player = "X"
+
+def print_board():
+  print()
+  print(board[0], "|" , board[1], "|", board[2])
+  print("--+---+--")
+  print(board[3], "|" , board[4], "|", board[5])
+  print("--+---+--")
+  print(board[6], "|" , board[7], "|", board[8])
+  print()
+
+def check_winner():
+  wins = [
+    (0,1,2),(3,4,5),(6,7,8),
+    (0,3,6),(1,4,7),(2,5,8),
+    (0,4,8),(2,4,6)
+  ]
+
+  for x,y,z in wins :
+    if board[x] == board[y] == board[z] != " ":
+      return True
+  return False
+
+while True : 
+  print_board()
+  move = int(input(f"Player {player}, choose 1 - 9 : ")) - 1
+  if move < 0 and move > 9 or board[move] != " ":
+    print("Invalid move..Try again!!")
+    continue
+
+  board[move] = player
+
+  if check_winner():
+    print_board()
+    print(f"Player {player} wins !!")
+    break
+
+  if " " not in board:
+    print_board()
+    print("It's a draw!!")
+    break
+
+  player = "O" if player == "X" else "X"
+
+
